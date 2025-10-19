@@ -12,12 +12,16 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
+    private final IOrderService orderService;
+
     @Autowired
-    private IOrderService orderService;
+    public OrderController(IOrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @PostMapping("/create")
     public Order create(@RequestBody Order order) {
-        Order newOrder = OrderFactory.createOrder(order.getUserId(), order.getOrderDate(), order.getTotalAmount(), order.getStatus());
+        Order newOrder = OrderFactory.createOrder(order.getUserId(), order.getTotalPrice(), order.getAddressId());
         return orderService.create(newOrder);
     }
 

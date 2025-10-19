@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
+    private final IUserService userService;
+
     @Autowired
-    private IUserService userService;
+    public UserController(IUserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/create")
     public User create(@RequestBody User user) {

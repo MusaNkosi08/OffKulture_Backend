@@ -12,12 +12,16 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
+    private final IProductService productService;
+
     @Autowired
-    private IProductService productService;
+    public ProductController(IProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping("/create")
     public Product create(@RequestBody Product product) {
-        Product newProduct = ProductFactory.createProduct(product.getName(), product.getDescription(), product.getPrice(), product.getStock());
+        Product newProduct = ProductFactory.createProduct(product.getName(), product.getDescription(), product.getPrice(), product.getStock(), product.getCategoryId(), product.getImageIds());
         return productService.create(newProduct);
     }
 

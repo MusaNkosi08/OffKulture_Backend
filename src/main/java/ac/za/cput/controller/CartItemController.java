@@ -12,8 +12,12 @@ import java.util.List;
 @RequestMapping("/cartitem")
 public class CartItemController {
 
+    private final ICartItemService cartItemService;
+
     @Autowired
-    private ICartItemService cartItemService;
+    public CartItemController(ICartItemService cartItemService) {
+        this.cartItemService = cartItemService;
+    }
 
     @PostMapping("/create")
     public CartItem create(@RequestBody CartItem cartItem) {

@@ -12,12 +12,16 @@ import java.util.List;
 @RequestMapping("/role")
 public class RoleController {
 
+    private final IRoleService roleService;
+
     @Autowired
-    private IRoleService roleService;
+    public RoleController(IRoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @PostMapping("/create")
     public Role create(@RequestBody Role role) {
-        Role newRole = RoleFactory.createRole(role.getId(), role.getName());
+        Role newRole = RoleFactory.createRole(role.getName());
         return roleService.create(newRole);
     }
 

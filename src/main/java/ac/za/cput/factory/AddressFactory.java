@@ -1,35 +1,36 @@
 package ac.za.cput.factory;
 
 import ac.za.cput.domain.Address;
+import ac.za.cput.util.Helper;
 
 /**
  * Factory for creating Address objects
  * @author Student
  */
 public class AddressFactory {
-    public static Address createAddress(String id, String street, String city,
+    public static Address createAddress(String street, String city,
             String postalCode, String country, String userId) {
-        if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("Address ID is required");
-        }
-        if (street == null || street.trim().isEmpty()) {
+
+        if (Helper.isNullOrEmpty(street)) {
             throw new IllegalArgumentException("Street is required");
         }
-        if (city == null || city.trim().isEmpty()) {
+        if (Helper.isNullOrEmpty(city)) {
             throw new IllegalArgumentException("City is required");
         }
-        if (postalCode == null || postalCode.trim().isEmpty()) {
+        if (Helper.isNullOrEmpty(postalCode)) {
             throw new IllegalArgumentException("Postal code is required");
         }
-        if (country == null || country.trim().isEmpty()) {
+        if (Helper.isNullOrEmpty(country)) {
             throw new IllegalArgumentException("Country is required");
         }
-        if (userId == null || userId.trim().isEmpty()) {
+        if (Helper.isNullOrEmpty(userId)) {
             throw new IllegalArgumentException("User ID is required");
         }
 
+        String addressId = Helper.generateId();
+
         return new Address.Builder()
-                .setId(id)
+                .setId(addressId)
                 .setStreet(street)
                 .setCity(city)
                 .setPostalCode(postalCode)

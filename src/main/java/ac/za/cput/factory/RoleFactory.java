@@ -1,26 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ac.za.cput.factory;
 
 import ac.za.cput.domain.Role;
+import ac.za.cput.util.Helper;
 
 /**
  *
  * @author Student
  */
 public class RoleFactory {
-    public static Role createRole(String id, String name) {
-        if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("ID cannot be null or empty");
-        }
-        if (name == null || name.isEmpty()) {
+    public static Role createRole(String name) {
+        if (Helper.isNullOrEmpty(name)) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
 
+        String roleId = Helper.generateId();
+
         return new Role.Builder()
-                .setId(id)
+                .setId(roleId)
                 .setName(name)
                 .build();
     }

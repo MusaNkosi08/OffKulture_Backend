@@ -3,7 +3,6 @@ package ac.za.cput.controller;
 import ac.za.cput.domain.Address;
 import ac.za.cput.factory.AddressFactory;
 import ac.za.cput.service.IAddressService;
-import ac.za.cput.service.impl.AddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,12 @@ import java.util.List;
 @RequestMapping("/address")
 public class AddressController {
 
+    private final IAddressService addressService;
+
     @Autowired
-    private IAddressService addressService;
+    public AddressController(IAddressService addressService) {
+        this.addressService = addressService;
+    }
 
     @PostMapping("/create")
     public Address create(@RequestBody Address address) {
